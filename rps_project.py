@@ -59,7 +59,7 @@ scissors = """
       (____)
 ---.__(___)
 """
-# function to create border 
+# function to create score border 
 def bordered(text):
     lines = text.splitlines()
     width = max(len(s) for s in lines)
@@ -82,14 +82,14 @@ while True:
     
     menu_input = input("> ").lower() 
     if menu_input == "rules":
-        print(f"""
+        print(bordered(f"""
         {"*" * 10} THE GAME IS ROCK, PAPER, SCISSORS {"*" * 10}
         To win:
         - Simply choose a move, either 'rock', 'paper', or 'scissors'
             - Rock beats Scissors
             - Scissors beat Paper
             - Paper beats Rock
-        """)
+        """))
         
         return_input = input("Would you like to return to the menu? (yes/no) ").lower()
         if return_input == "yes":
