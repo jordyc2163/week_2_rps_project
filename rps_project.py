@@ -29,7 +29,10 @@ lose_pic = """
   ୧༼ಠ益ಠ༽︻ YOU LOSE!
 ******************************
 """
-
+win_pic = """
+♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪ You WIN!
+******************************
+"""
 
 rock = """
     _______
@@ -56,6 +59,15 @@ scissors = """
       (____)
 ---.__(___)
 """
+# function to create score border 
+def bordered(text):
+    lines = text.splitlines()
+    width = max(len(s) for s in lines)
+    res = ['┌' + '─' * width + '┐']
+    for s in lines:
+        res.append('│' + (s + ' ' * width)[:width] + '│')
+    res.append('└' + '─' * width + '┘')
+    return '\n'.join(res)
 
 while True:
     print(f"""
@@ -70,14 +82,14 @@ while True:
     
     menu_input = input("> ").lower() 
     if menu_input == "rules":
-        print(f"""
+        print(bordered(f"""
         {"*" * 10} THE GAME IS ROCK, PAPER, SCISSORS {"*" * 10}
         To win:
         - Simply choose a move, either 'rock', 'paper', or 'scissors'
             - Rock beats Scissors
             - Scissors beat Paper
             - Paper beats Rock
-        """)
+        """))
         
         return_input = input("Would you like to return to the menu? (yes/no) ").lower()
         if return_input == "yes":
@@ -127,14 +139,14 @@ while True:
             if player_move == comp_move:
                 print("It's a tie!")
             elif player_move == "rock" and comp_move == "scissors" or player_move == "paper" and comp_move == "rock" or player_move == "scissors" and comp_move == "paper":
-                print("YOU WIN!!!")
+                print(win_pic)
                 player_score += 1
             else:
                 print(lose_pic)
                 comp_score += 1
 
-            print(f"Total Wins | {player_score}")
-            print(f"Total Losses | {comp_score}")
+            print(bordered(f"Total Wins -- {player_score}"))
+            print(bordered(f"Total Losses -- {comp_score}"))
             game_input = input("Would you like to play again? (Type yes/no) ")
             if game_input == "yes":
                 continue
