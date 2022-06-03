@@ -1,5 +1,16 @@
 from random import randint
-from art import *
+import art
+
+game_over = """
+ 
+░██████╗░░█████╗░███╗░░░███╗███████╗ ░█████╗░██╗░░░██╗███████╗██████╗░
+██╔════╝░██╔══██╗████╗░████║██╔════╝ ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+██║░░██╗░███████║██╔████╔██║█████╗░░ ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░ ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+╚██████╔╝██║░░██║██║░╚═╝░██║███████╗ ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝ ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+ 
+"""
 rps_option1 = """
           _____                    _____                    _____          
          /\    \                  /\    \                  /\    \         
@@ -30,9 +41,11 @@ lose_pic = """
 ******************************
 """
 win_pic = """
-♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪ You WIN!
+♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪ 
 ******************************
+           You WIN!
 """
+# art imported from PyPi "art 5.6" - JC
 
 rock = """
     _______
@@ -59,7 +72,7 @@ scissors = """
       (____)
 ---.__(___)
 """
-# function to create score border 
+# function to create score border - MS
 def bordered(text):
     lines = text.splitlines()
     width = max(len(s) for s in lines)
@@ -96,21 +109,21 @@ while True:
             continue
         else:
             break
-    if menu_input == "play":
+    elif menu_input == "play":
     # play
         player_score = 0
         comp_score = 0
         while True:
             num = randint(1, 3)
-            # making the random integer (variable makes it easy to place in code)
+            # making the random integer (variable makes it easy to place in code) -JC
             if num == 1:
                 comp_move = "rock"
             elif num == 2:
                 comp_move = "paper"
             elif num == 3:
                 comp_move = "scissors"
-            # pre setting the variable comp_move to exist as a readable move 
-            # a number is generated before the game even begins
+            # pre setting the variable comp_move to exist as a readable move - JC
+            # a number is generated before the game even begins - JC
 
             player_move = input("enter your move ").lower()
             print("YOUR MOVE: ")
@@ -121,10 +134,10 @@ while True:
                 print(paper)
             elif player_move == "scissors":
                 print(scissors)
-            # user input's move creates the image; no winning condition has been set yet
+            # user input's move creates the image; no winning condition has been set yet - JC
             print()
             print("COMPUTER MOVE")
-            # regardless of the user's decision, it is now the computer's turn so we print the statement
+            # regardless of the user's decision, it is now the computer's turn so we print the statement - JC
 
             if comp_move == "rock":
                 print(rock)
@@ -132,10 +145,10 @@ while True:
                 print(paper)
             elif comp_move == "scissors":
                 print(scissors)
-            # copy and pasted from the above since we want to see what the computer move is. This condition is performed after player's move even though the move was generated before the game started. 
+            # copy and pasted from the above since we want to see what the computer move is. This condition is performed after player's move even though the move was generated before the game started. - JC
 
 
-            # we now tell the user if they won or not with the winning conditions
+            # we now tell the user if they won or not with the winning conditions - JC
             if player_move == comp_move:
                 print("It's a tie!")
             elif player_move == "rock" and comp_move == "scissors" or player_move == "paper" and comp_move == "rock" or player_move == "scissors" and comp_move == "paper":
@@ -145,14 +158,14 @@ while True:
                 print(lose_pic)
                 comp_score += 1
 
-            print(bordered(f"Total Wins -- {player_score}"))
-            print(bordered(f"Total Losses -- {comp_score}"))
+            print(bordered(f"Total Wins -- {player_score}      Total Losses -- {comp_score}"))
             game_input = input("Would you like to play again? (Type yes/no) ")
             if game_input == "yes":
                 continue
             else:
                 break
-    if menu_input == "quit":
+    elif menu_input == "quit":
+        print(game_over)
         print("Thanks for playing!")
         break
 
